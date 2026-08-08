@@ -1,0 +1,88 @@
+==================================================================
+GOOGLE SHEETS (E-TABLOLAR) ENTEGRASYON KILAVUZU
+==================================================================
+
+Bu kılavuz, davetiyenizdeki "Çiftimize Mesaj" formundan gönderilen tebrik 
+mesajlarının doğrudan size ait bir Google E-Tablo (Spreadsheet) dosyasına 
+satır satır kaydedilmesini sağlamak için hazırlanmıştır.
+
+Lütfen aşağıdaki adımları sırasıyla uygulayınız:
+
+------------------------------------------------------------------
+ADIM 1: Google E-Tablo Oluşturma
+------------------------------------------------------------------
+1. Tarayıcınızda Google Drive veya doğrudan Google Sheets (E-Tablolar) açın.
+2. Boş bir e-tablo (Spreadsheet) oluşturun.
+3. Tabloya dilediğiniz bir isim verin (Örn: "Nida & Utkan Nişan Tebrik Mesajları").
+4. İlk satıra herhangi bir şey yazmanıza gerek yoktur, kod bunu otomatik oluşturacaktır.
+
+------------------------------------------------------------------
+ADIM 2: Apps Script Editörünü Açma
+------------------------------------------------------------------
+1. Oluşturduğunuz Google E-Tablo dosyasının üst menüsünden:
+   Uzantılar (Extensions) -> Apps Script seçeneğine tıklayın.
+2. Karşınıza kod yazabileceğiniz bir editör ekranı gelecektir.
+3. Orada halihazırda bulunan tüm kodları silin (boşaltın).
+
+------------------------------------------------------------------
+ADIM 3: Aşağıdaki Kodu Kopyalayıp Yapıştırın
+------------------------------------------------------------------
+Aşağıdaki kod bloğunun tamamını kopyalayın ve Apps Script ekranına yapıştırın:
+
+function doPost(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data = JSON.parse(e.postData.contents);
+    
+    // Eğer tablo tamamen boşsa ilk satıra başlıkları ekle
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(["Adı Soyadı", "Telefon Numarası", "Tebrik Mesajı", "Tarih"]);
+    }
+    
+    // Gelen verileri yeni satır olarak ekle
+    sheet.appendRow([
+      data.fullName || "",
+      data.phone || "",
+      data.message || "",
+      data.date || new Date().toLocaleString("tr-TR")
+    ]);
+    
+    return ContentService.createTextOutput(JSON.stringify({ "result": "success" }))
+                         .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({ "result": "error", "error": error.toString() }))
+                         .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(e) {
+  return ContentService.createTextOutput("Google Sheets Web Uygulaması Çalışıyor.");
+}
+
+------------------------------------------------------------------
+ADIM 4: Kaydetme ve Dağıtma (Yayınlama)
+------------------------------------------------------------------
+1. Kod editörünün üstündeki Disket simgesine basarak projeyi kaydedin.
+2. Üst menüden sırasıyla:
+   Dağıt (Deploy) -> Yeni dağıtım (New deployment) seçeneğine tıklayın.
+3. Açılan pencerede sol üstteki dişli simgesine (Select type) tıklayıp "Web uygulaması" (Web app) seçeneğini seçin.
+4. Ayarları şu şekilde yapın:
+   - Açıklama (Description): "Tebrik Formu Bağlantısı"
+   - Uygulamayı yürüten kişi (Execute as): "Ben" (E-posta adresiniz yazar - Me)
+   - Erişimi olanlar (Who has access): "Herkes" (Anyone) -> **DİKKAT: Burayı mutlaka "Herkes/Anyone" yapmalısınız, aksi takdirde misafirlerinizin mesajı tabloya yazamaz.**
+5. En alttaki "Dağıt" (Deploy) butonuna basın.
+6. Google sizden erişim izni isteyebilir. "İzinleri Yetkilendir" (Authorize Access) deyin, Google hesabınızı seçin, çıkan uyarıda sol alttaki "Gelişmiş" (Advanced) seçeneğine tıklayıp "Güvenli Değil" veya "Projeye Git" linkine tıklayarak izin verin.
+
+------------------------------------------------------------------
+ADIM 5: URL'yi Alıp Davetiyeye Yapıştırma
+------------------------------------------------------------------
+1. Dağıtım başarıyla tamamlandığında ekranda "Web uygulaması URL'si" (Web app URL) adında uzun bir link belirecektir.
+2. Bu linki "Kopyala" (Copy) butonuna basarak kopyalayın.
+3. Bilgisayarınızdaki davetiye klasöründeki "script.js" dosyasını bir metin editörüyle açın.
+4. Dosyanın en üstündeki şu satırı bulun:
+   const GOOGLE_SHEETS_URL = "";
+5. Kopyaladığınız linki tırnak işaretlerinin arasına yapıştırın. Örnek görünüm:
+   const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbz.../exec";
+6. Dosyayı kaydedin.
+
+Tebrikler! Artık misafirleriniz davetiyede mesaj gönderdiğinde yazdıkları mesajlar anında sizin Google E-Tablonuza eklenecektir.

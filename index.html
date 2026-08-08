@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nida & Utkan — Düğün Davetiyesi</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Nida Ceyhan & Utkan Altunbaş çiftinin 30.08.2026 tarihindeki düğün törenine davetlisiniz. Dijital davetiye üzerinden çiftimize tebrik mesajılarınızı iletebilirsiniz.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Open Graph / Facebook Share Meta Tags (for WhatsApp/Social Media preview cards) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Nida & Utkan — Düğün Davetiyesi">
+    <meta property="og:description" content="Nida Ceyhan & Utkan Altunbaş çiftinin 30.08.2026 tarihindeki düğün törenine davetlisiniz. Sizleri de aramızda görmekten mutluluk duyacağız.">
+    <meta property="og:image" content="https://nida-utkan.davetiye.com/assets/couple.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://nida-utkan.davetiye.com"> <!-- Set default url placeholder -->
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nida & Utkan — Düğün Davetiyesi">
+    <meta name="twitter:description" content="Nida Ceyhan & Utkan Altunbaş çiftinin 30.08.2026 tarihindeki düğün törenine davetlisiniz.">
+    <meta name="twitter:image" content="https://nida-utkan.davetiye.com/assets/couple.jpg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Pinyon+Script&family=Tenor+Sans&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="style.css?v=51">
+</head>
+<body>
+
+
+
+    <!-- Music Player (Audio Element) -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="assets/music.mp4#t=47" type="audio/mp4">
+        <source src="assets/music.mp3#t=47" type="audio/mpeg">
+    </audio>
+
+    <!-- Preloader / Interactive 3D Split-Gate Envelope -->
+    <div id="envelope-wrapper">
+        <div class="envelope-container-wrapper">
+            <div class="split-envelope" id="envelope-main">
+                <div class="envelope-gate gate-left">
+                    <div class="gate-inner">
+                        <div class="embossed-leaves leaves-left"></div>
+                        <div class="embossed-leaves leaves-left-bottom"></div>
+                        <div class="gold-trim"></div>
+                    </div>
+                </div>
+                <div class="envelope-gate gate-right">
+                    <div class="gate-inner">
+                        <div class="embossed-leaves leaves-right"></div>
+                        <div class="embossed-leaves leaves-right-bottom"></div>
+                        <div class="gold-trim"></div>
+                    </div>
+                </div>
+                
+                <button id="open-btn" class="wax-seal" title="Davetiyeyi Aç">
+                    <img src="assets/seal.png" alt="N&U Mühür" class="wax-seal-img">
+                </button>
+            </div>
+            <div class="envelope-hint font-tenor">
+                Açmak İçin Mühre Tıklayınız
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content (Hidden until envelope is opened) -->
+    <main id="main-content">
+        
+        <!-- Music Floating Control Button -->
+        <button id="music-toggle" class="music-btn spinning" aria-label="Müziği Duraklat/Çal">
+            <i class="fas fa-music"></i>
+        </button>
+
+        <!-- Hidden Admin Dashboard Floating Button (Visible only with ?admin URL or secret trigger) -->
+        <button id="admin-floating-btn" class="admin-float-btn hidden" title="Gelen Mesajlar (Yönetici Paneli)">
+            <i class="fa-solid fa-gear"></i>
+        </button>
+
+        <!-- Scrollable Content Container -->
+        <div class="scroll-content">
+                
+                <!-- Slide 1: Welcome -->
+                <section class="slide-section" id="slide-welcome">
+                    <div class="couple-chibi-container">
+                        <img src="assets/couple.png" alt="Chibi Wedding Couple" class="couple-chibi-img">
+                    </div>
+                    <h1 class="hero-names font-pinyon" id="hero-names-trigger" style="cursor: pointer;">
+                        <span class="name-line">Nida</span>
+                        <span class="amp font-playfair">&</span>
+                        <span class="name-line">Utkan</span>
+                    </h1>
+                    <div class="divider-mini"></div>
+                    <p class="card-quote font-cormorant">"Birbirini bulan iki kalbin, ömür boyu sürecek yolculuğuna davetlisiniz."</p>
+                    
+                    <!-- Scroll Down Indicator -->
+                    <div class="scroll-down-indicator">
+                        <span class="scroll-text font-tenor">Aşağı Kaydırınız</span>
+                        <div class="scroll-arrow">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 2: Families -->
+                <section class="slide-section" id="slide-families">
+                    <div class="leaf-icon" style="display: inline-flex; gap: 8px; justify-content: center; align-items: center;">
+                        <i class="fa-solid fa-user-friends"></i>
+                        <i class="fa-solid fa-user-friends"></i>
+                    </div>
+                    <h2 class="card-title font-tenor">AİLELERİMİZ</h2>
+                    <div class="divider-mini"></div>
+                    
+                    <div class="families-grid mt-6">
+                        <div class="family-card-minimal">
+                           <p class="family-note font-tenor" style="margin-bottom: 6px; font-weight: 600; color: var(--color-accent);">Gelin Ailesi</p>
+                           <h3 class="family-title font-cormorant" style="font-size: 1.65rem; font-weight: 400; line-height: 1.25; color: var(--color-text-dark);">
+                               Ülkü ~ Kemal<br>
+                               <span style="font-size: 0.75em; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Tenor Sans', sans-serif; font-weight: 300; opacity: 0.85;">CEYHAN</span>
+                           </h3>
+                        </div>
+                        <div class="amp-divider font-playfair">&</div>
+                        <div class="family-card-minimal">
+                           <p class="family-note font-tenor" style="margin-bottom: 6px; font-weight: 600; color: var(--color-accent);">Damat Ailesi</p>
+                           <h3 class="family-title font-cormorant" style="font-size: 1.65rem; font-weight: 400; line-height: 1.25; color: var(--color-text-dark);">
+                               Yasemin ~ Murat<br>
+                               <span style="font-size: 0.75em; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Tenor Sans', sans-serif; font-weight: 300; opacity: 0.85;">ALTUNBAŞ</span>
+                           </h3>
+                        </div>
+                    </div>
+                    <!-- Scroll Down Indicator -->
+                    <div class="scroll-down-indicator">
+                        <span class="scroll-text font-tenor">Aşağı Kaydırınız</span>
+                        <div class="scroll-arrow">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 2: Countdown -->
+                <section class="slide-section" id="slide-countdown">
+                    <div class="leaf-icon"><i class="fa-regular fa-clock"></i></div>
+                    <h2 class="card-title font-tenor">BULUŞMAYA KALAN</h2>
+                    <div class="divider-mini"></div>
+                    
+                    <div class="countdown-container mt-6">
+                        <div class="countdown-item">
+                            <span id="days" class="time-num">00</span>
+                            <span class="time-label font-tenor">Gün</span>
+                        </div>
+                        <div class="countdown-colon">:</div>
+                        <div class="countdown-item">
+                            <span id="hours" class="time-num">00</span>
+                            <span class="time-label font-tenor">Saat</span>
+                        </div>
+                        <div class="countdown-colon">:</div>
+                        <div class="countdown-item">
+                            <span id="minutes" class="time-num">00</span>
+                            <span class="time-label font-tenor">Dakika</span>
+                        </div>
+                        <div class="countdown-colon">:</div>
+                        <div class="countdown-item">
+                            <span id="seconds" class="time-num">00</span>
+                            <span class="time-label font-tenor">Saniye</span>
+                        </div>
+                    </div>
+                    
+                    <p class="card-quote font-cormorant mt-6" style="font-style: italic;">
+                        "İki ruh, bir deniz kadar derin bir aşkla birleşiyor..."
+                    </p>
+                    <!-- Scroll Down Indicator -->
+                    <div class="scroll-down-indicator">
+                        <span class="scroll-text font-tenor">Aşağı Kaydırınız</span>
+                        <div class="scroll-arrow">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+                <!-- Slide 6: Date & Time -->
+                <section class="slide-section" id="slide-datetime">
+                    <div class="leaf-icon"><i class="fa-regular fa-calendar-check"></i></div>
+                    <h2 class="card-title font-tenor">TARİH & SAAT</h2>
+                    <div class="divider-mini"></div>
+                    
+                    <div class="date-time-box mt-4">
+                        <div class="date-large font-cormorant">30</div>
+                        <div class="date-month font-tenor">AĞUSTOS 2026</div>
+                        <div class="date-day font-tenor">PAZAR</div>
+                        <div class="date-hours font-tenor">19:00 — 23:00</div>
+                    </div>
+                    <!-- Scroll Down Indicator -->
+                    <div class="scroll-down-indicator">
+                        <span class="scroll-text font-tenor">Aşağı Kaydırınız</span>
+                        <div class="scroll-arrow">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 7: Location -->
+                <section class="slide-section" id="slide-location">
+                    <div class="leaf-icon"><i class="fa-solid fa-map-pin"></i></div>
+                    <h2 class="card-title font-tenor">KONUM</h2>
+                    <div class="divider-mini"></div>
+                    
+                    <div class="location-box mt-2">
+                        <div class="coordinates font-tenor">39.6366° N, 33.6119° E</div>
+                        
+                        <div class="map-outline-container mt-2">
+                            <div class="map-outline-pin"><i class="fa-solid fa-location-dot"></i></div>
+                            <div class="map-grid-lines"></div>
+                        </div>
+                        
+                        <h3 class="venue-name font-tenor mt-2">Aybala Düğün Salonu</h3>
+                        <p class="venue-address">Km., Yeni Mahallesi, Kayseri Yolu Caddesi No:3, 71800 Keskin/Kırıkkale</p>
+                        
+                        <div class="action-btn-group mt-4">
+                            <a href="https://maps.google.com/?q=Aybala+D%C3%BC%C4%9F%C3%BCn+Salonu+Keskin+K%C4%B1r%C4%B1kkale" target="_blank" rel="noopener noreferrer" class="btn-primary action-btn w-full">
+                                <i class="fa-solid fa-map-location-dot"></i> HARİTADA AÇ
+                            </a>
+                            <div class="dropdown-wrapper w-full mt-1">
+                                <button id="calendar-btn" type="button" class="btn-accent action-btn w-full">
+                                    <i class="fa-regular fa-calendar-plus"></i> Takvime Ekle
+                                </button>
+                                <div id="calendar-dropdown" class="dropdown-menu hidden">
+                                    <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Nida+%26+Utkan+D%C3%BC%C4%9F%C3%BCn+T%C3%B6reni&dates=20260830T160000Z/20260830T200000Z&details=Sizleri+de+aram%C4%B1zda+g%C3%B6rmekten+mutluluk+duyar%C4%B1z.&location=Aybala+D%C3%BC%C4%9F%C3%BCn+Salonu" target="_blank" rel="noopener noreferrer">Google Takvim</a>
+                                    <button id="apple-cal-btn" type="button">Apple Takvim (iCal)</button>
+                                </div>
+                            </div>
+                            <button id="share-btn" type="button" class="btn-accent action-btn w-full mt-1">
+                                <i class="fa-solid fa-share-nodes"></i> Davetiyeyi Paylaş
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Scroll Down Indicator -->
+                    <div class="scroll-down-indicator">
+                        <span class="scroll-text font-tenor">Aşağı Kaydırınız</span>
+                        <div class="scroll-arrow">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide: Photo Gallery -->
+                <section class="slide-section" id="slide-gallery">
+                    <div class="gallery-header-container">
+                        <div class="gallery-title-frame">
+                            <span class="frame-dot left-dot"></span>
+                            <span class="gallery-title-text font-cormorant">En Güzel Anlarımız</span>
+                            <span class="frame-dot right-dot"></span>
+                        </div>
+                    </div>
+                    <p class="gallery-subtitle font-tenor mt-4">Birlikte biriktirdiğimiz en özel duraklar</p>
+                    <div class="divider-mini"></div>
+                    
+                    <!-- 2x2 Photo Grid -->
+                    <div class="gallery-grid mt-6">
+                        <div class="gallery-item">
+                            <img src="assets/gallery1.jpg" alt="Anı 1" class="gallery-img">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/gallery2.jpg" alt="Anı 2" class="gallery-img">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/gallery3.jpg" alt="Anı 3" class="gallery-img">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/gallery4.jpg" alt="Anı 4" class="gallery-img">
+                        </div>
+                    </div>
+                    <!-- Scroll Down Indicator -->
+                    <div class="scroll-down-indicator">
+                        <span class="scroll-text font-tenor">Aşağı Kaydırınız</span>
+                        <div class="scroll-arrow">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 6: RSVP / Message to Couple -->
+                <section class="slide-section" id="slide-rsvp">
+                    <div class="leaf-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                    <h2 class="card-title font-tenor">ÇİFTİMİZE MESAJINIZ</h2>
+                    <div class="divider-mini"></div>
+                    
+                    <form id="rsvp-form" class="mt-4" style="width: 100%;">
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <input type="text" id="rsvp-name" placeholder="Adınız" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="rsvp-surname" placeholder="Soyadınız" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" id="rsvp-phone" placeholder="Telefon Numarası">
+                        </div>
+                        
+                        <div class="form-group mt-2">
+                            <textarea id="rsvp-message" placeholder="Tebrik mesajıınız..." required rows="3"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full mt-4">GÖNDER</button>
+                    </form>
+                </section>
+
+            </div> <!-- End of scroll-content -->
+    </main>
+
+    <!-- Hidden RSVP Dashboard Modal -->
+    <div id="admin-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Çiftimize Gelen Mesajlar</h3>
+                <button class="close-modal" id="close-admin-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="admin-stats" style="grid-template-columns: 1fr; max-width: 200px; margin: 0 auto;">
+                    <div class="stat-card">
+                        <span class="stat-num" id="stat-total-messages">0</span>
+                        <span class="stat-label">Toplam Mesaj</span>
+                    </div>
+                </div>
+                
+                <div class="table-actions mt-6">
+                    <button id="export-csv-btn" class="btn-accent btn-sm">
+                        <i class="fa-solid fa-file-csv"></i> CSV Olarak İndir
+                    </button>
+                    <button id="clear-rsvps-btn" class="btn-danger btn-sm">
+                        <i class="fa-solid fa-trash-can"></i> Tümünü Temizle
+                    </button>
+                </div>
+
+                <div class="table-container mt-4">
+                    <table id="rsvp-table">
+                        <thead>
+                            <tr>
+                                <th>Adı Soyadı</th>
+                                <th>Telefon</th>
+                                <th>Mesaj</th>
+                                <th>Tarih</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rsvp-table-body">
+                            <tr>
+                                <td colspan="4" class="text-center py-4">Henüz tebrik mesajıı gönderilmedi.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Logic Script -->
+    <script src="script.js?v=29"></script>
+</body>
+</html>
