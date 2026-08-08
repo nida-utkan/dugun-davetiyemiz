@@ -1,4 +1,5 @@
 const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbyJtOr8zFAXIi1DszHtLqkk915CGo2hsDnN75sLIfjqlZRQ-UkrqS-aTbDv5KFIhEo7/exec"; 
+const ADMIN_PASSWORD = "1234"; // Yönetici giriş şifreniz (İstediğiniz gibi değiştirebilirsiniz)
 
 document.addEventListener('DOMContentLoaded', () => {
     
@@ -273,43 +274,68 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(closePopup, 5000);
     }
 
-    // 6. Private Admin Panel / Dashboard Modal Logic
-    const heroNamesTrigger = document.getElementById('hero-names-trigger');
+    // 6. Password-Protected Admin Panel Modal Logic
     const adminFloatingBtn = document.getElementById('admin-floating-btn');
     const adminModal = document.getElementById('admin-modal');
+    const passwordModal = document.getElementById('password-modal');
+    const passwordForm = document.getElementById('password-form');
+    const adminPassInput = document.getElementById('admin-pass-input');
+    const closePassBtn = document.getElementById('close-pass-btn');
     const closeAdminBtn = document.getElementById('close-admin-btn');
     const exportCsvBtn = document.getElementById('export-csv-btn');
     const clearRsvpsBtn = document.getElementById('clear-rsvps-btn');
     const rsvpTableBody = document.getElementById('rsvp-table-body');
     
-    // Check if secret URL parameter is present (e.g. index.html?admin or index.html?utkan)
-    const urlParams = new URLSearchParams(window.location.search);
-    const isAdminUrl = urlParams.has('admin') || urlParams.has('utkan') || urlParams.has('yonetici') || urlParams.has('panel');
-    
-    if (isAdminUrl && adminFloatingBtn) {
-        adminFloatingBtn.classList.remove('hidden');
-    }
-
+    // Open Password Modal on Gear Click
     if (adminFloatingBtn) {
-        adminFloatingBtn.addEventListener('click', openAdminPanel);
-    }
-    
-    // Secret Gesture: Triple-click on "Nida & Utkan" title to open admin panel
-    if (heroNamesTrigger) {
-        let clickCount = 0;
-        let clickTimer = null;
-        heroNamesTrigger.addEventListener('click', () => {
-            clickCount++;
-            if (clickCount === 1) {
-                clickTimer = setTimeout(() => {
-                    clickCount = 0;
-                }, 1200);
-            } else if (clickCount >= 3) {
-                clearTimeout(clickTimer);
-                clickCount = 0;
-                openAdminPanel();
+        adminFloatingBtn.addEventListener('click', () => {
+            if (passwordModal) {
+                passwordModal.classList.remove('hidden');
+                body.classList.add('lock-scroll');
+                if (adminPassInput) {
+                    adminPassInput.value = '';
+                    adminPassInput.focus();
+                }
             }
         });
+    }
+
+    // Password Form Submit Handler
+    if (passwordForm) {
+        passwordForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const inputVal = adminPassInput ? adminPassInput.value.trim() : '';
+            if (inputVal === ADMIN_PASSWORD) {
+                if (passwordModal) passwordModal.classList.add('hidden');
+                openAdminPanel();
+                if (adminPassInput) adminPassInput.value = '';
+            } else {
+                showToastMessage('Hatalı Şifre!');
+                if (adminPassInput) {
+                    adminPassInput.value = '';
+                    adminPassInput.focus();
+                }
+            }
+        });
+    }
+
+    if (closePassBtn) {
+        closePassBtn.addEventListener('click', closePasswordModal);
+    }
+
+    if (passwordModal) {
+        passwordModal.addEventListener('click', (e) => {
+            if (e.target === passwordModal) {
+                closePasswordModal();
+            }
+        });
+    }
+
+    function closePasswordModal() {
+        if (passwordModal) passwordModal.classList.add('hidden');
+        if (adminModal.classList.contains('hidden')) {
+            body.classList.remove('lock-scroll');
+        }
     }
     
     closeAdminBtn.addEventListener('click', closeAdminPanel);
@@ -333,29 +359,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function loadRSVPs() {
-        const rsvps = JSON.parse(localStorage.getItem('dugun_rsvps')) || [];
+        let rsvps = JSON.parse(localStorage.getItem('dugun_rsvps')) || [];
+        renderRSVPTable(rsvps);
         
+        // Google Sheets tanımlıysa tüm misafirlerin gönderdiği ortak verileri çek
+        if (typeof GOOGLE_SHEETS_URL !== 'undefined' && GOOGLE_SHEETS_URL && GOOGLE_SHEETS_URL !== "") {
+            fetch(GOOGLE_SHEETS_URL)
+                .then(res => res.json())
+                .then(cloudData => {
+                    if (Array.isArray(cloudData) && cloudData.length > 0) {
+                        renderRSVPTable(cloudData);
+                    }
+                })
+                .catch(err => console.log('Ortak veriler alınamadı:', err));
+        }
+    }
+
+    function renderRSVPTable(dataList) {
         rsvpTableBody.innerHTML = '';
-        
-        if (rsvps.length === 0) {
+        if (!dataList || dataList.length === 0) {
             rsvpTableBody.innerHTML = '<tr><td colspan="4" class="text-center py-4">Henüz tebrik mesajıı gönderilmedi.</td></tr>';
-        } else {
-            // Sort by date (newest first)
-            rsvps.slice().reverse().forEach(item => {
-                // Add to table
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td style="font-weight: 500;">${escapeHTML(item.fullName)}</td>
-                    <td>${escapeHTML(item.phone)}</td>
-                    <td style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${escapeHTML(item.message)}">${escapeHTML(item.message)}</td>
-                    <td>${item.date}</td>
-                `;
-                rsvpTableBody.appendChild(tr);
-            });
+            document.getElementById('stat-total-messages').innerText = 0;
+            return;
         }
         
+        // Sort by date (newest first)
+        dataList.slice().reverse().forEach(item => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td style="font-weight: 500;">${escapeHTML(item.fullName)}</td>
+                <td>${escapeHTML(item.phone)}</td>
+                <td style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${escapeHTML(item.message)}">${escapeHTML(item.message)}</td>
+                <td>${escapeHTML(item.date)}</td>
+            `;
+            rsvpTableBody.appendChild(tr);
+        });
+        
         // Update stats DOM
-        document.getElementById('stat-total-messages').innerText = rsvps.length;
+        document.getElementById('stat-total-messages').innerText = dataList.length;
     }
     
     function escapeHTML(str) {

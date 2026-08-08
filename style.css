@@ -544,26 +544,28 @@ h1, h2, h3, h4 {
 
 .admin-float-btn {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 44px;
-    height: 44px;
-    background: var(--color-white);
-    border: 1px solid rgba(var(--color-accent-rgb), 0.25);
-    border-radius: 50%;
+    top: 14px;
+    left: 16px;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
     color: var(--color-accent);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-md);
+    box-shadow: none;
     z-index: 100;
-    font-size: 1rem;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 0.85rem;
+    opacity: 0.28; /* Subtle and non-intrusive by default */
+    transition: all 0.3s ease;
 }
 
-.admin-float-btn:hover {
-    transform: scale(1.1) rotate(45deg);
+.admin-float-btn:hover,
+.admin-float-btn:active {
+    opacity: 0.85;
+    transform: scale(1.15) rotate(45deg);
     color: var(--color-text-dark);
 }
 

@@ -82,8 +82,8 @@
             <i class="fas fa-music"></i>
         </button>
 
-        <!-- Hidden Admin Dashboard Floating Button (Visible only with ?admin URL or secret trigger) -->
-        <button id="admin-floating-btn" class="admin-float-btn hidden" title="Gelen Mesajlar (Yönetici Paneli)">
+        <!-- Admin Dashboard Floating Button (Top Left - Password Protected) -->
+        <button id="admin-floating-btn" class="admin-float-btn" title="Yönetici Girişi (Şifreli)">
             <i class="fa-solid fa-gear"></i>
         </button>
 
@@ -95,7 +95,7 @@
                     <div class="couple-chibi-container">
                         <img src="assets/couple.png" alt="Chibi Wedding Couple" class="couple-chibi-img">
                     </div>
-                    <h1 class="hero-names font-pinyon" id="hero-names-trigger" style="cursor: pointer;">
+                    <h1 class="hero-names font-pinyon">
                         <span class="name-line">Nida</span>
                         <span class="amp font-playfair">&</span>
                         <span class="name-line">Utkan</span>
@@ -321,6 +321,23 @@
 
             </div> <!-- End of scroll-content -->
     </main>
+
+    <!-- Password Protection Modal -->
+    <div id="password-modal" class="modal hidden">
+        <div class="modal-content" style="max-width: 360px; padding: 24px; text-align: center;">
+            <div class="modal-header" style="justify-content: center; border: none; padding: 0 0 12px 0;">
+                <h3 style="font-size: 1.25rem; font-family: 'Tenor Sans', sans-serif;"><i class="fa-solid fa-shield-halved"></i> Yönetici Girişi</h3>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--color-text-muted); margin-bottom: 16px;">Gelen mesajları görmek için şifrenizi giriniz.</p>
+            <form id="password-form">
+                <input type="password" id="admin-pass-input" placeholder="••••" required style="text-align: center; letter-spacing: 0.3em; font-size: 1.2rem;">
+                <div style="display: flex; gap: 10px; margin-top: 16px;">
+                    <button type="button" id="close-pass-btn" class="btn-accent w-full" style="padding: 10px; font-size: 0.8rem;">İptal</button>
+                    <button type="submit" class="btn-primary w-full" style="padding: 10px; font-size: 0.8rem;">Giriş Yap</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Hidden RSVP Dashboard Modal -->
     <div id="admin-modal" class="modal hidden">

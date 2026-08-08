@@ -56,7 +56,29 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  return ContentService.createTextOutput("Google Sheets Web Uygulaması Çalışıyor.");
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var rows = sheet.getDataRange().getValues();
+    var rsvps = [];
+    
+    // İlk satır başlık olduğu için 1. indeksten başla
+    for (var i = 1; i < rows.length; i++) {
+      if (rows[i][0] || rows[i][2]) {
+        rsvps.push({
+          fullName: rows[i][0],
+          phone: rows[i][1],
+          message: rows[i][2],
+          date: rows[i][3]
+        });
+      }
+    }
+    
+    return ContentService.createTextOutput(JSON.stringify(rsvps))
+                         .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify([]))
+                         .setMimeType(ContentService.MimeType.JSON);
+  }
 }
 
 ------------------------------------------------------------------
