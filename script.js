@@ -1,4 +1,4 @@
-const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbyJtOr8zFAXIi1DszHtLqkk915CGo2hsDnN75sLIfjqlZRQ-UkrqS-aTbDv5KFIhEo7/exec"; 
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbxvgQFSHwjY2hpTAXDf5ERJ4q28WL2VFUfaPgEpApSXrItec7n44wYARdhMWlooCyUQ/exec"; 
 const ADMIN_PASSWORD = "1234"; // Yönetici giriş şifreniz (İstediğiniz gibi değiştirebilirsiniz)
 
 document.addEventListener('DOMContentLoaded', () => {
